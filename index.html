@@ -22,7 +22,8 @@
     </div>
 
     <div class="music-container">
-    <h4 id="playlist-title"> Sobre nós </h4>
+    <!-- heading above player; change as needed -->
+    <h4 id="playlist-title">Sobre o Nós</h4>
     <img id='cover' alt="Disc Cover"></img>
     <audio id='audio'></audio>
     <div id="below-cover"> 
@@ -51,52 +52,55 @@
       </div>
     </div>
 
+
     <div class="container">
       <!-- stylized card matching screenshot -->
       <div class="couple-card">
-        <img src="JamesTW.webp" alt="JamesTW.webp" class="couple-cover" />
+        <img src="imagens/JamesTW.webp" alt="Andre e Larissa" class="couple-cover" />
         <div class="couple-info">
-          <div class="couple-name">Larissa e Andre</div>
+          <div class="couple-name">Andre & Larissa</div>
           <div class="couple-date">Juntos desde 2026</div>
         </div>
-      </div>
+        <!-- counter moved inside card -->
+        <div class="contador">
+          <h2>Estamos juntos há:</h2>
 
-      <div class="contador">
-        <h2>Estamos juntos há:</h2>
+          <div class="tempo">
+            <div>
+              <span id="meses">0</span>
+              <p>Meses</p>
+            </div>
 
-        <div class="tempo">
-          <div>
-            <span id="meses">0</span>
-            <p>Meses</p>
-          </div>
+            <div>
+              <span id="dias">0</span>
+              <p>Dias</p>
+            </div>
 
-          <div>
-            <span id="dias">0</span>
-            <p>Dias</p>
-          </div>
+            <div>
+              <span id="horas">0</span>
+              <p>Horas</p>
+            </div>
 
-          <div>
-            <span id="horas">0</span>
-            <p>Horas</p>
-          </div>
+            <div>
+              <span id="minutos">0</span>
+              <p>Minutos</p>
+            </div>
 
-          <div>
-            <span id="minutos">0</span>
-            <p>Minutos</p>
-          </div>
-
-          <div>
-            <span id="segundos">0</span>
-            <p>Segundos</p>
+            <div>
+              <span id="segundos">0</span>
+              <p>Segundos</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <button onclick="mostrarMensagem()">Mostrar Mensagem 💌</button>
+      <button class="message-btn" onclick="mostrarMensagem()">Mensagem Especial 💌</button>
 
       <div id="mensagem" class="mensagem">
+        <button id="close-msg" class="button light-color">✕</button>
         <p>
-          Amor,
+        Amor,<br>
+        
 Às vezes eu paro para pensar em como a vida é cheia de encontros, caminhos e coincidências… e, entre todas elas, a mais bonita foi ter encontrado você.
 Você chegou na minha vida de um jeito tão especial que, sem perceber, foi se tornando parte de tudo. Dos meus pensamentos, dos meus planos, das minhas risadas e até dos meus sonhos mais simples. Porque quando penso no futuro, de alguma forma você sempre está lá.
 O que eu sinto por você vai muito além de palavras bonitas. É algo que mora no meu coração todos os dias, nas pequenas coisas, nos momentos em silêncio, nos abraços que parecem fazer o mundo parar por um instante.
@@ -104,6 +108,34 @@ Você me faz sentir segura, feliz e amada de um jeito que eu nem sabia que era p
 Se um dia você duvidar do quanto é importante para mim, lembre-se disso: você é uma das melhores coisas que já aconteceram na minha vida. E, independente de qualquer coisa, sempre vai ter um lugar enorme no meu coração que é só seu.
 Eu te amo, hoje, amanhã e em todos os dias que ainda vamos viver juntos.❤️
         </p>
+      </div>
+      <!-- credits section inserted below info cards -->
+      <div class="credits">
+        <div class="credits-header">
+          <h3>Créditos</h3>
+          <button class="show-all">Mostrar todos</button>
+        </div>
+        <ul class="credit-list">
+          <li>
+            <div class="credit-info">
+              <span class="name">James TW</span>
+              <span class="role">Artista principal · Compositor/a · Letrista</span>
+            </div>
+            <button class="follow-btn small">Seguir</button>
+          </li>
+          <li>
+            <div class="credit-info">
+              <span class="name">Larissa Fossato</span>
+              <span class="role">Desenvolvedora </span>
+            </div>
+          </li>
+          <li>
+            <div class="credit-info">
+              <span class="name">Andre Higashi</span>
+              <span class="role">Namorado </span>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <script src="script.js"></script>

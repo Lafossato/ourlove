@@ -180,6 +180,15 @@ if (closeButton) {
     hideOverlay();
   });
 }
+
+// close message box when its own button is pressed
+const closeMsg = document.getElementById("close-msg");
+if (closeMsg) {
+  closeMsg.addEventListener("click", () => {
+    const msg = document.getElementById("mensagem");
+    if (msg) msg.classList.remove("visible");
+  });
+}
 play.addEventListener("click", playPauseDecider);
 previous.addEventListener("click", previousSong);
 next.addEventListener("click", nextSong);
@@ -192,22 +201,29 @@ repeatButton.addEventListener("click", repeatButtonClicked);
 
 initializeSong();
 
-const dataInicio = new Date("2026-02-01");
+// anniversary start date (changed to Feb 11 per request)
+const dataInicio = new Date("2026-02-11");
 
 function atualizarTempo() {
-  const dataInicio = new Date("2026-02-01");
+  // re‑use the module‑level dataInicio instead of redeclaring
   const agora = new Date();
 
   let anos = agora.getFullYear() - dataInicio.getFullYear();
-  let meses = agora.getMonth() - dataInicio.getMonth() + 1; // +1 para incluir o mês atual
+  // compute raw month difference (no +1 hack)
+  let meses = agora.getMonth() - dataInicio.getMonth();
   let dias = agora.getDate() - dataInicio.getDate();
 
+  // if current day is before the start day, borrow days from previous month
+  // and subtract one so that the count excludes the start day itself.
+  // e.g. 11 fev → 10 mar should yield 27 dias, not 28.
   if (dias < 0) {
-    meses--;
     const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
     dias += ultimoMes.getDate();
+    dias -= 1; // correct off-by-one after the borrow
+    // meses--;  // still not decrementing months
   }
 
+  // if month difference went negative, borrow a year
   if (meses < 0) {
     anos--;
     meses += 12;

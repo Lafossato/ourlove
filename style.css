@@ -11,7 +11,7 @@ body {
 
 /* container that holds the player */
 .music-container {
-  background-color: #5a1a1a;
+  background-color: #3e1111;
   padding: 30px;
   border-radius: 12px;
   width: 90%;
@@ -149,6 +149,7 @@ button {
   width: 100%;
   max-width: 450px; /* increased to match the white border size */
   border-radius: 8px;
+  margin-bottom: 15px; /* add space below cover so text isn't crowded */
 }
 
 #playlist-title {
@@ -156,6 +157,9 @@ button {
   flex-direction: row;
   justify-content: center;
   margin: 1em 0 4em 0;
+  position: relative;
+  z-index: 1; /* keep above other overlapping elements */
+  text-decoration: none; /* ensure no strikethrough */
 }
 
 #song-info {
@@ -201,17 +205,96 @@ button {
   justify-content: space-between;
   font-size: smaller;
   margin-top: 0.5em;
+  /* add extra gap below time display before controls */
+  padding-bottom: 0.8em;
+}
+
+#button-container {
+  margin-top: 0.8em; /* additional spacing from time-box */
 }
 
 .container {
   margin-top: 20px;
   padding: 30px;
-  background-color: #100d0d;
+  /* gradient from the same dark red above the player down to black */
+  background: linear-gradient(135deg, #3e1111 0%, #000000 100%);
   border: 3px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   max-width: 500px;
   width: 90%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* when contador sits inside couple-card, make it blend */
+.couple-card .contador {
+  margin-top: 20px;
+  background: none;
+  padding: 0;
+}
+
+/* info cards similar to Spotify artist card */
+.info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 10px 0; /* reduced vertical gap */
+}
+.info-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 280px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  color: #ffffff;
+  text-align: left;
+}
+.info-cover {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+.info-details {
+  padding: 15px 20px;
+}
+.info-details h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+.info-details p {
+  font-size: 0.9rem;
+  margin: 0 0 12px 0;
+  color: #b3b3b3;
+}
+.follow-btn {
+  background: #a11a1a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+.follow-btn:hover {
+  background: #c11a1a;
+}
+.couple-card .contador h2 {
+  color: #e0e0e0;
+  font-size: 1.25rem;
+  margin-bottom: 14px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* tweak tempo boxes for dark card background */
+.couple-card .tempo div {
+  background: rgba(0, 0, 0, 0.3);
 }
 /* card showing couple name/date similar to screenshot */
 .couple-card {
@@ -297,39 +380,112 @@ h1 {
   letter-spacing: 0.5px;
 }
 
-button {
-  margin-top: 20px;
-  padding: 15px 30px;
+.cards-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.message-btn {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 25px;
   border: none;
-  border-radius: 30px;
-  background: #1db954;
+  border-radius: 20px;
+  background: #a11a1a; /* deep red to match design */
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  box-shadow: 0 4px 15px rgba(161, 26, 26, 0.3);
 }
 
-button:hover {
-  background: #1ed760;
+.message-btn:hover {
+  background: #c11a1a;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.5);
+  box-shadow: 0 6px 20px rgba(193, 26, 26, 0.5);
+}
+/* credits section styling */
+.credits {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 10px auto; /* less vertical space */
+  max-width: 500px;
+  color: #ffffff;
+  text-align: left;
+}
+.credits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.credits-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.credits-header .show-all {
+  background: none;
+  color: #1db954;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.credit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.credit-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.credit-list li:first-child {
+  border-top: none;
+}
+.credit-info .name {
+  display: block;
+  font-weight: bold;
+}
+.credit-info .role {
+  display: block;
+  font-size: 0.85rem;
+  color: #b3b3b3;
+}
+.follow-btn.small {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+/* ensure music controls keep transparent/green-icon style */
+.music-container button {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 .mensagem {
   /* hidden by default but keep the space for transitions */
   display: none;
   margin-top: 20px;
-  background: linear-gradient(135deg, #5a1c1c 0%, #3a0f0f 100%);
-  padding: 30px;
+  background: #3e1111; /* unify with player container */
+  border: 2px solid #1a1a1a;
+  padding: 40px 30px;
   border-radius: 12px;
   width: 80%;
   max-width: 600px;
   margin: 20px auto;
   color: #ffffff;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
+  text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   transition:
     opacity 0.5s ease,
@@ -339,6 +495,26 @@ button:hover {
   /* allow scroll when text is very long */
   max-height: 60vh;
   overflow-y: auto;
+  position: relative;
+}
+
+.mensagem p {
+  margin: 0;
+}
+
+/* decorative heart at top */
+.mensagem::before {
+  content: "💌";
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#close-msg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em;
 }
 
 /* class used to show the message with animation */
