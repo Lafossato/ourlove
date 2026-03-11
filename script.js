@@ -18,10 +18,16 @@ const youMe = {
   file: "James TW-You & Me",
 };
 
+const soyLunaEres = {
+  songName: "Eres",
+  artist: "Michael Ronda e Karol Sevilla",
+  file: "SoyLunaEres",
+};
+
 let isPlaying = false;
 let isShuffled = false;
 let repeatOn = false;
-const originalPlaylist = [youMe];
+const originalPlaylist = [youMe,soyLunaEres];
 let sortedPlaylist = [...originalPlaylist];
 let index = 0;
 
@@ -189,6 +195,12 @@ if (closeMsg) {
     if (msg) msg.classList.remove("visible");
   });
 }
+
+// attach listener to the message toggle button (styled via .message-btn class)
+const msgBtn = document.getElementById("message-btn");
+if (msgBtn) {
+  msgBtn.addEventListener("click", mostrarMensagem);
+}
 play.addEventListener("click", playPauseDecider);
 previous.addEventListener("click", previousSong);
 next.addEventListener("click", nextSong);
@@ -209,7 +221,7 @@ function atualizarTempo() {
   const agora = new Date();
 
   let anos = agora.getFullYear() - dataInicio.getFullYear();
-  // compute raw month difference (no +1 hack)
+  // month difference ignoring days
   let meses = agora.getMonth() - dataInicio.getMonth();
   let dias = agora.getDate() - dataInicio.getDate();
 
@@ -220,13 +232,21 @@ function atualizarTempo() {
     const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
     dias += ultimoMes.getDate();
     dias -= 1; // correct off-by-one after the borrow
-    // meses--;  // still not decrementing months
+    meses--; // decrement month because we haven't reached the full month yet
   }
 
   // if month difference went negative, borrow a year
   if (meses < 0) {
     anos--;
     meses += 12;
+  }
+
+  // convert to inclusive count (Feb→Mar counts as 2 months, etc.)
+  meses += 1;
+  // if we rolled exactly into another year
+  if (meses === 12) {
+    anos++;
+    meses = 0;
   }
 
   const horas = agora.getHours();
