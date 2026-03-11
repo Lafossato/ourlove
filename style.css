@@ -1,0 +1,349 @@
+body {
+  background-color: #121212; /* Spotify dark background */
+  color: #ffffff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* container that holds the player */
+.music-container {
+  background-color: #5a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.music-container.playing {
+  transform: scale(1.03);
+}
+
+/* now playing overlay */
+.now-playing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.now-playing.hidden {
+  display: none;
+}
+
+.overlay-content {
+  background: #282828;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  max-width: 90%;
+}
+
+#cover-large {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+#overlay-song-info {
+  color: #ffffff;
+}
+
+#overlay-song-name {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#overlay-artist-name {
+  font-size: 1.2em;
+  color: #b3b3b3;
+  margin-top: 5px;
+}
+
+#close-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em;
+}
+
+/* reuse button defaults */
+button {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+}
+
+/* rest of existing styles unchanged */
+button {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+}
+
+#below-cover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0 0.5em 0;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button {
+  font-size: 2.2em;
+  cursor: pointer;
+  color: #1db954;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  color: #1ed760;
+  transform: scale(1.1);
+}
+
+.button-conteiner {
+  font-size: 2.2em;
+  cursor: pointer;
+  color: #1db954;
+  background-color: inherit;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.button-conteiner:hover {
+  color: #1ed760;
+  transform: scale(1.1);
+}
+
+.button-navigate {
+  color: #1ed760;
+  font-size: 2.2em;
+}
+
+.button-biggest {
+  color: #1ed760;
+  font-size: 2.2em;
+}
+
+#cover {
+  width: 100%;
+  max-width: 450px; /* increased to match the white border size */
+  border-radius: 8px;
+}
+
+#playlist-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1em 0 4em 0;
+}
+
+#song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#song-name {
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+
+.light-color {
+  color: rgb(139, 153, 156);
+}
+
+#progress-bar {
+  background-color: #404040;
+  height: 4px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+#current-progress {
+  background-color: #1db954;
+  height: inherit;
+  width: 0%;
+  cursor: pointer;
+}
+
+#progress-container {
+  cursor: pointer;
+}
+
+.button-active {
+  color: rgb(0, 128, 62);
+}
+
+#time-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: smaller;
+  margin-top: 0.5em;
+}
+
+.container {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: #100d0d;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+/* card showing couple name/date similar to screenshot */
+.couple-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-align: left;
+}
+
+.couple-cover {
+  width: 100%;
+  display: block;
+}
+
+.couple-info {
+  padding: 15px 20px;
+}
+
+.couple-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.couple-date {
+  font-size: 1rem;
+  color: #b3b3b3;
+  margin-top: 5px;
+}
+h1 {
+  font-size: 40px;
+}
+
+.foto {
+  width: 300px;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.tempo {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.tempo div {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1f1f1f 100%);
+  padding: 20px 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 80px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tempo div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.tempo div span {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #1db954;
+  margin-bottom: 5px;
+}
+
+.tempo div p {
+  font-size: 12px;
+  color: #b3b3b3;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  background: #1db954;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+button:hover {
+  background: #1ed760;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.5);
+}
+
+.mensagem {
+  /* hidden by default but keep the space for transitions */
+  display: none;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #5a1c1c 0%, #3a0f0f 100%);
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  /* allow scroll when text is very long */
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* class used to show the message with animation */
+.mensagem.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
