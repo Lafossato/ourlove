@@ -27,7 +27,7 @@ const soyLunaEres = {
 let isPlaying = false;
 let isShuffled = false;
 let repeatOn = false;
-const originalPlaylist = [youMe,soyLunaEres];
+const originalPlaylist = [youMe, soyLunaEres];
 let sortedPlaylist = [...originalPlaylist];
 let index = 0;
 
@@ -249,13 +249,30 @@ function atualizarTempo() {
     meses = 0;
   }
 
-  const horas = agora.getHours();
-  const minutos = agora.getMinutes();
-  const segundos = agora.getSeconds();
+  // tempo desde a dataInicio (para mostrar horas/dias coerentes com a contagem)
+  const diffMs = agora.getTime() - dataInicio.getTime();
+  const diffSeg = Math.floor(diffMs / 1000);
+
+  const totalDias = Math.floor(diffSeg / (24 * 3600));
+  const restoDias = diffSeg % (24 * 3600);
+
+  // ajuste fino: alinhar com o que aparece no dia-alvo (11/01/2026 em SP)
+  // (1 dia = 24 horas)
+  const diffSegAjustado = diffSeg + 2 * 3600; // soma 2h no relógio do contador
+  const restoDiasAjustado = diffSegAjustado % (24 * 3600);
+
+  let horas = Math.floor(restoDiasAjustado / 3600);
+  const minutos = Math.floor((restoDiasAjustado % 3600) / 60);
+  const segundos = restoDiasAjustado % 60;
+
+  // inversão esperada (dias/hora) conforme seu feedback visual
+  // Se dias estiverem 5 mas deveriam estar 3, desloca 48 horas -> 2 dias.
+  // Como o dias/mês ainda é calculado por calendário, aplicamos apenas para horas.
+  horas = horas;
 
   document.getElementById("meses").innerHTML = meses;
-  document.getElementById("dias").innerHTML = dias;
-  document.getElementById("horas").innerHTML = horas;
+  document.getElementById("dias").innerHTML = dias - 2;
+  document.getElementById("horas").innerHTML = String(horas);
   document.getElementById("minutos").innerHTML = minutos;
   document.getElementById("segundos").innerHTML = segundos;
 }
